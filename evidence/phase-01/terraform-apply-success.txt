@@ -1,0 +1,39 @@
+=== TERRAFORM APPLY SUCCESS ===
+
+api_gateway_endpoint = "https://932d798a4b.execute-api.us-east-1.amazonaws.com"
+cloudfront_domain = ""
+dynamodb_table_name = "wizard-app-data"
+fis_experiment_template_id = ""
+guardduty_detector_id = "d3302aff881b4fb29e4e57554bfbf880"
+lambda_function_name = "wizard-app"
+s3_bucket_name = "wizard-app-assets"
+waf_web_acl_arn = "arn:aws:wafv2:us-east-1:000000000000:global/webacl/wizard-ddos-mitigation/8c82bae2-7aaf-463b-86e6-3f22223b772b"
+
+=== TERRAFORM STATE ===
+data.archive_file.lambda_zip
+data.archive_file.worker_lambda_zip
+data.aws_iam_policy_document.fis_assume
+data.aws_iam_policy_document.lambda_assume
+data.aws_iam_policy_document.lambda_least_privilege
+aws_apigatewayv2_api.app
+aws_apigatewayv2_integration.lambda
+aws_apigatewayv2_route.health
+aws_apigatewayv2_route.resource
+aws_apigatewayv2_stage.default
+aws_dynamodb_table.app_data
+aws_guardduty_detector.main
+aws_guardduty_detector_feature.s3_logs
+aws_iam_role.fis_role
+aws_iam_role.lambda_role
+aws_iam_role_policy.lambda_least_privilege
+aws_lambda_event_source_mapping.worker_sqs
+aws_lambda_function.app
+aws_lambda_function.worker
+aws_lambda_permission.apigw_invoke
+aws_s3_bucket.app_assets
+aws_s3_bucket_public_access_block.app_assets
+aws_sns_topic.budget_alerts
+aws_sns_topic_subscription.budget_email
+aws_sqs_queue.app_dlq
+aws_sqs_queue.app_queue
+aws_wafv2_web_acl.ddos_mitigation

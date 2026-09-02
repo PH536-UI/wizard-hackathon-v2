@@ -1,0 +1,206 @@
+======================================================
+WIZARD CLOUD HACKATHON 2026
+TIME-02
+FINAL INFRASTRUCTURE EVIDENCE
+======================================================
+qua 02 set 2026 16:40:56 UTC
+
+======================================================
+1. TERRAFORM
+======================================================
+api_gateway_endpoint = "https://932d798a4b.execute-api.us-east-1.amazonaws.com"
+cloudfront_domain = ""
+dynamodb_table_name = "wizard-app-data"
+fis_experiment_template_id = ""
+guardduty_detector_id = "d3302aff881b4fb29e4e57554bfbf880"
+lambda_function_name = "wizard-app"
+s3_bucket_name = "wizard-app-assets"
+waf_web_acl_arn = "arn:aws:wafv2:us-east-1:000000000000:global/webacl/wizard-ddos-mitigation/8c82bae2-7aaf-463b-86e6-3f22223b772b"
+
+data.archive_file.lambda_zip
+data.archive_file.worker_lambda_zip
+data.aws_iam_policy_document.fis_assume
+data.aws_iam_policy_document.lambda_assume
+data.aws_iam_policy_document.lambda_least_privilege
+aws_apigatewayv2_api.app
+aws_apigatewayv2_integration.lambda
+aws_apigatewayv2_route.health
+aws_apigatewayv2_route.resource
+aws_apigatewayv2_stage.default
+aws_dynamodb_table.app_data
+aws_guardduty_detector.main
+aws_guardduty_detector_feature.s3_logs
+aws_iam_role.fis_role
+aws_iam_role.lambda_role
+aws_iam_role_policy.lambda_least_privilege
+aws_lambda_event_source_mapping.worker_sqs
+aws_lambda_function.app
+aws_lambda_function.worker
+aws_lambda_permission.apigw_invoke
+aws_s3_bucket.app_assets
+aws_s3_bucket_public_access_block.app_assets
+aws_sns_topic.budget_alerts
+aws_sns_topic_subscription.budget_email
+aws_sqs_queue.app_dlq
+aws_sqs_queue.app_queue
+aws_wafv2_web_acl.ddos_mitigation
+
+======================================================
+2. API HEALTH
+======================================================
+HTTP/1.1 200 OK
+content-length: 34
+Content-Type: application/json
+Date: Wed, 02 Sep 2026 16:41:06 GMT
+x-amz-id-2: 63f18fd9-d2e4-4380-b097-b4cadce0025b
+x-amz-request-id: 63f18fd9-d2e4-4380-b097-b4cadce0025b
+x-amzn-RequestId: 63f18fd9-d2e4-4380-b097-b4cadce0025b
+
+{"status": "ok", "ts": 1788367266}
+
+======================================================
+3. LEAD FLOW
+======================================================
+HTTP/1.1 202 Accepted
+content-length: 74
+Content-Type: application/json
+Date: Wed, 02 Sep 2026 16:41:06 GMT
+x-amz-id-2: 891134df-67bd-45a6-8a72-4185ddb3ab29
+x-amz-request-id: 891134df-67bd-45a6-8a72-4185ddb3ab29
+x-amzn-RequestId: 891134df-67bd-45a6-8a72-4185ddb3ab29
+
+{"status": "queued", "message_id": "a65d52d3-e15e-45c5-b704-363e7849820d"}
+
+======================================================
+4. SQS
+======================================================
+{
+    "Attributes": {
+        "ApproximateNumberOfMessages": "0",
+        "ApproximateNumberOfMessagesNotVisible": "0"
+    }
+}
+
+======================================================
+5. DYNAMODB
+======================================================
+{
+    "Items": [
+        {
+            "pk": {
+                "S": "lead"
+            },
+            "sk": {
+                "S": "1788366354703"
+            },
+            "name": {
+                "S": "Participante Demo"
+            },
+            "email": {
+                "S": "demo@wizard.local"
+            },
+            "processed_at": {
+                "N": "1788366354"
+            }
+        },
+        {
+            "pk": {
+                "S": "lead"
+            },
+            "sk": {
+                "S": "1788366546981"
+            },
+            "name": {
+                "S": "Evidence Participant"
+            },
+            "email": {
+                "S": "evidence@wizard.local"
+            },
+            "processed_at": {
+                "N": "1788366546"
+            }
+        },
+        {
+            "pk": {
+                "S": "lead"
+            },
+            "sk": {
+                "S": "1788367267616"
+            },
+            "name": {
+                "S": "Final Evidence Participant"
+            },
+            "email": {
+                "S": "final@wizard.local"
+            },
+            "processed_at": {
+                "N": "1788367267"
+            }
+        }
+    ],
+    "Count": 3,
+    "ScannedCount": 3,
+    "ConsumedCapacity": null
+}
+
+======================================================
+6. EVENT SOURCE MAPPING
+======================================================
+{
+    "UUID": "fd9c8b06-cf04-4815-97d1-a9a1dd8e65c5",
+    "BatchSize": 10,
+    "EventSourceArn": "arn:aws:sqs:us-east-1:000000000000:wizard-app-queue",
+    "FunctionArn": "arn:aws:lambda:us-east-1:000000000000:function:wizard-worker",
+    "LastModified": "2026-09-02T16:16:33.974000+00:00",
+    "State": "Enabled",
+    "FunctionResponseTypes": [
+        "ReportBatchItemFailures"
+    ]
+}
+
+======================================================
+7. SECURITY
+======================================================
+{
+    "PublicAccessBlockConfiguration": {
+        "BlockPublicAcls": true,
+        "IgnorePublicAcls": true,
+        "BlockPublicPolicy": true,
+        "RestrictPublicBuckets": true
+    }
+}
+
+=== GUARDDUTY ===
+{
+    "CreatedAt": "2026-09-02T16:15:40.403Z",
+    "FindingPublishingFrequency": "SIX_HOURS",
+    "ServiceRole": "arn:aws:iam::000000000000:role/aws-service-role/guardduty.amazonaws.com/AWSServiceRoleForAmazonGuardDuty",
+    "Status": "ENABLED",
+    "UpdatedAt": "2026-09-02T16:15:43.261Z",
+    "Tags": {
+        "Name": "wizard-guardduty",
+        "Team": "Time-02",
+        "Project": "wizard",
+        "Event": "WizardCloudHackathon2026"
+    },
+    "Features": [
+        {
+            "Name": "S3_DATA_EVENTS",
+            "Status": "ENABLED",
+            "UpdatedAt": "2026-09-02T16:15:43+00:00"
+        }
+    ]
+}
+
+======================================================
+FINAL STATUS
+======================================================
+Terraform resources: 22
+API: HEALTHY
+Lead flow: WORKING
+SQS -> Lambda: ENABLED
+Lambda -> DynamoDB: WORKING
+S3 public access: BLOCKED
+GuardDuty: ENABLED
+WAF: CONFIGURED
+DLQ: CONFIGURED

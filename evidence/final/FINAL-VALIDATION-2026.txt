@@ -1,0 +1,163 @@
+============================================================
+       WIZARD CLOUD HACKATHON 2026
+       FINAL INFRASTRUCTURE VALIDATION
+============================================================
+
+Date: qua 02 set 2026 17:06:15 UTC
+Project: wizard
+Region: us-east-1
+Emulator: Floci
+Endpoint: http://localhost:4566
+
+============================================================
+1. DOCKER / FLOCi
+============================================================
+Container=floci Image=floci/floci:latest Status=Up 4 hours (healthy) Ports=0.0.0.0:4566->4566/tcp, [::]:4566->4566/tcp
+
+Floci health:
+{"services":{"ssm":"running","sqs":"running","s3":"running","dynamodb":"running","sns":"running","lambda":"running","apigateway":"running","iam":"running","kafka":"running","mq":"running","elasticache":"running","memorydb":"running","rds":"running","rds-data":"running","neptune":"running","docdb":"running","redshift":"running","events":"running","servicediscovery":"running","elasticmapreduce":"running","emr-serverless":"running","wafv2":"running","scheduler":"running","logs":"running","monitoring":"running","secretsmanager":"running","apigatewayv2":"running","kinesis":"running","kinesisanalytics":"running","kms":"running","cognito-idp":"running","states":"running","swf":"running","cloudformation":"running","acm":"running","athena":"running","glue":"running","firehose":"running","email":"running","es":"running","ec2":"running","ecs":"running","appconfig":"running","appconfigdata":"running","ecr":"running","tagging":"running","bedrock-runtime":"running","eks":"running","mwaa":"running","pipes":"running","bedrock-agentcore-control":"running","bedrock-agentcore":"running","elasticloadbalancing":"running","elb":"running","codebuild":"running","batch":"running","codedeploy":"running","codepipeline":"running","servicequotas":"running","ram":"running","config":"running","cloudtrail":"running","lightsail":"running","cloudcontrol":"running","sso":"running","autoscaling":"running","application-autoscaling":"running","elasticbeanstalk":"running","backup":"running","resource-explorer-2":"running","fis":"running","transfer":"running","route53":"running","textract":"running","comprehend":"running","rekognition":"running","pricing":"running","transcribe":"running","ce":"running","cur":"running","bcm-data-exports":"running","cloudfront":"running","appsync":"running","s3vectors":"running","s3tables":"running","iot":"running","iotdata":"running","cloudhsmv2":"running","organizations":"running","rum":"running","guardduty":"running","route53resolver":"running","connect":"running","network-firewall":"running","servicecatalog":"running","controltower":"running","aps":"running","lakeformation":"running","efs":"running","codeguru-reviewer":"running"},"edition":"community","original_edition":"floci-always-free","version":"2.0.1"}
+
+============================================================
+2. TERRAFORM STATE
+============================================================
+AWS managed resources:
+22
+Data sources:
+5
+Total state entries:
+27
+
+Resources:
+aws_apigatewayv2_api.app
+aws_apigatewayv2_integration.lambda
+aws_apigatewayv2_route.health
+aws_apigatewayv2_route.resource
+aws_apigatewayv2_stage.default
+aws_dynamodb_table.app_data
+aws_guardduty_detector.main
+aws_guardduty_detector_feature.s3_logs
+aws_iam_role.fis_role
+aws_iam_role.lambda_role
+aws_iam_role_policy.lambda_least_privilege
+aws_lambda_event_source_mapping.worker_sqs
+aws_lambda_function.app
+aws_lambda_function.worker
+aws_lambda_permission.apigw_invoke
+aws_s3_bucket.app_assets
+aws_s3_bucket_public_access_block.app_assets
+aws_sns_topic.budget_alerts
+aws_sns_topic_subscription.budget_email
+aws_sqs_queue.app_dlq
+aws_sqs_queue.app_queue
+aws_wafv2_web_acl.ddos_mitigation
+
+============================================================
+3. TERRAFORM VALIDATION
+============================================================
+[32m[1mSuccess![0m The configuration is valid.
+[0m
+
+============================================================
+4. TERRAFORM PLAN
+============================================================
+data.archive_file.lambda_zip: Reading...
+data.archive_file.worker_lambda_zip: Reading...
+data.archive_file.worker_lambda_zip: Read complete after 0s [id=d160a9867639514c4e4d82e407d3b565fae49492]
+data.archive_file.lambda_zip: Read complete after 0s [id=fb205db037a21ed764731298982ccd282173b666]
+data.aws_iam_policy_document.lambda_assume: Reading...
+data.aws_iam_policy_document.fis_assume: Reading...
+aws_guardduty_detector.main: Refreshing state... [id=d3302aff881b4fb29e4e57554bfbf880]
+aws_sns_topic.budget_alerts: Refreshing state... [id=arn:aws:sns:us-east-1:000000000000:wizard-budget-alerts]
+aws_sqs_queue.app_dlq: Refreshing state... [id=http://localhost:4566/000000000000/wizard-app-dlq]
+aws_apigatewayv2_api.app: Refreshing state... [id=932d798a4b]
+data.aws_iam_policy_document.fis_assume: Read complete after 0s [id=1152939330]
+aws_s3_bucket.app_assets: Refreshing state... [id=wizard-app-assets]
+aws_dynamodb_table.app_data: Refreshing state... [id=wizard-app-data]
+data.aws_iam_policy_document.lambda_assume: Read complete after 0s [id=2690255455]
+aws_iam_role.lambda_role: Refreshing state... [id=wizard-lambda-role]
+aws_iam_role.fis_role: Refreshing state... [id=wizard-fis-role]
+aws_guardduty_detector_feature.s3_logs: Refreshing state... [id=d3302aff881b4fb29e4e57554bfbf880/S3_DATA_EVENTS]
+aws_apigatewayv2_stage.default: Refreshing state... [id=$default]
+aws_sqs_queue.app_queue: Refreshing state... [id=http://localhost:4566/000000000000/wizard-app-queue]
+aws_sns_topic_subscription.budget_email: Refreshing state... [id=arn:aws:sns:us-east-1:000000000000:wizard-budget-alerts:84d5fa57-bddd-4be4-92dc-2ede3a63d7ad]
+aws_lambda_function.app: Refreshing state... [id=wizard-app]
+aws_lambda_function.worker: Refreshing state... [id=wizard-worker]
+aws_s3_bucket_public_access_block.app_assets: Refreshing state... [id=wizard-app-assets]
+data.aws_iam_policy_document.lambda_least_privilege: Reading...
+data.aws_iam_policy_document.lambda_least_privilege: Read complete after 0s [id=1948165143]
+aws_iam_role_policy.lambda_least_privilege: Refreshing state... [id=wizard-lambda-role:wizard-lambda-least-privilege]
+aws_lambda_event_source_mapping.worker_sqs: Refreshing state... [id=fd9c8b06-cf04-4815-97d1-a9a1dd8e65c5]
+aws_apigatewayv2_integration.lambda: Refreshing state... [id=c41a5e89]
+aws_lambda_permission.apigw_invoke: Refreshing state... [id=AllowAPIGatewayInvoke]
+aws_apigatewayv2_route.resource: Refreshing state... [id=78ae4edf]
+aws_apigatewayv2_route.health: Refreshing state... [id=37983633]
+aws_wafv2_web_acl.ddos_mitigation: Refreshing state... [id=8c82bae2-7aaf-463b-86e6-3f22223b772b]
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  ~ update in-place
+
+Terraform will perform the following actions:
+
+  # aws_lambda_event_source_mapping.worker_sqs will be updated in-place
+  ~ resource "aws_lambda_event_source_mapping" "worker_sqs" {
+        id                                 = "fd9c8b06-cf04-4815-97d1-a9a1dd8e65c5"
+      ~ maximum_batching_window_in_seconds = 0 -> 5
+        tags                               = {}
+      ~ tags_all                           = {
+          + "Event"   = "WizardCloudHackathon2026"
+          + "Project" = "wizard"
+          + "Team"    = "Time-02"
+        }
+        # (23 unchanged attributes hidden)
+    }
+
+Plan: 0 to add, 1 to change, 0 to destroy.
+
+─────────────────────────────────────────────────────────────────────────────
+
+Note: You didn't use the -out option to save this plan, so Terraform can't
+guarantee to take exactly these actions if you run "terraform apply" now.
+
+============================================================
+5. TERRAFORM OUTPUTS
+============================================================
+api_gateway_endpoint = "https://932d798a4b.execute-api.us-east-1.amazonaws.com"
+cloudfront_domain = ""
+dynamodb_table_name = "wizard-app-data"
+fis_experiment_template_id = ""
+guardduty_detector_id = "d3302aff881b4fb29e4e57554bfbf880"
+lambda_function_name = "wizard-app"
+s3_bucket_name = "wizard-app-assets"
+waf_web_acl_arn = "arn:aws:wafv2:us-east-1:000000000000:global/webacl/wizard-ddos-mitigation/8c82bae2-7aaf-463b-86e6-3f22223b772b"
+
+============================================================
+6. SAFETY STATUS
+============================================================
+terraform destroy: NOT EXECUTED
+Infrastructure destruction: NOT EXECUTED
+Resources to create: 0
+Resources to destroy: 0
+
+============================================================
+7. PREVIOUS EVIDENCE
+============================================================
+[OK] evidence/phase-01/terraform-apply-success.txt
+[OK] evidence/phase-02/end-to-end-lead-flow.txt
+[OK] evidence/phase-03/security-resilience.txt
+[OK] evidence/phase-04/terraform-plan-clean.txt
+[OK] evidence/phase-04/phase-04-state-summary.txt
+
+============================================================
+FINAL STATUS
+============================================================
+Infrastructure preserved: YES
+Terraform validation: SUCCESS
+Terraform refresh: SUCCESS
+Terraform destroy: NOT EXECUTED
+AWS resources managed: 22
+Data sources: 5
+Total Terraform state entries: 27
+Plan: 0 add / 1 change / 0 destroy
+Floci: HEALTHY
+============================================================

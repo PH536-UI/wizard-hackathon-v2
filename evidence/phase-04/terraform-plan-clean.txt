@@ -1,0 +1,58 @@
+data.archive_file.lambda_zip: Reading...
+data.archive_file.worker_lambda_zip: Reading...
+data.archive_file.worker_lambda_zip: Read complete after 0s [id=d160a9867639514c4e4d82e407d3b565fae49492]
+data.archive_file.lambda_zip: Read complete after 0s [id=fb205db037a21ed764731298982ccd282173b666]
+aws_dynamodb_table.app_data: Refreshing state... [id=wizard-app-data]
+aws_apigatewayv2_api.app: Refreshing state... [id=932d798a4b]
+aws_guardduty_detector.main: Refreshing state... [id=d3302aff881b4fb29e4e57554bfbf880]
+aws_sns_topic.budget_alerts: Refreshing state... [id=arn:aws:sns:us-east-1:000000000000:wizard-budget-alerts]
+aws_s3_bucket.app_assets: Refreshing state... [id=wizard-app-assets]
+aws_sqs_queue.app_dlq: Refreshing state... [id=http://localhost:4566/000000000000/wizard-app-dlq]
+data.aws_iam_policy_document.fis_assume: Reading...
+data.aws_iam_policy_document.lambda_assume: Reading...
+data.aws_iam_policy_document.lambda_assume: Read complete after 0s [id=2690255455]
+data.aws_iam_policy_document.fis_assume: Read complete after 0s [id=1152939330]
+aws_iam_role.lambda_role: Refreshing state... [id=wizard-lambda-role]
+aws_iam_role.fis_role: Refreshing state... [id=wizard-fis-role]
+aws_apigatewayv2_stage.default: Refreshing state... [id=$default]
+aws_guardduty_detector_feature.s3_logs: Refreshing state... [id=d3302aff881b4fb29e4e57554bfbf880/S3_DATA_EVENTS]
+aws_sns_topic_subscription.budget_email: Refreshing state... [id=arn:aws:sns:us-east-1:000000000000:wizard-budget-alerts:84d5fa57-bddd-4be4-92dc-2ede3a63d7ad]
+aws_lambda_function.worker: Refreshing state... [id=wizard-worker]
+aws_s3_bucket_public_access_block.app_assets: Refreshing state... [id=wizard-app-assets]
+aws_sqs_queue.app_queue: Refreshing state... [id=http://localhost:4566/000000000000/wizard-app-queue]
+data.aws_iam_policy_document.lambda_least_privilege: Reading...
+aws_lambda_function.app: Refreshing state... [id=wizard-app]
+data.aws_iam_policy_document.lambda_least_privilege: Read complete after 0s [id=1948165143]
+aws_lambda_event_source_mapping.worker_sqs: Refreshing state... [id=fd9c8b06-cf04-4815-97d1-a9a1dd8e65c5]
+aws_iam_role_policy.lambda_least_privilege: Refreshing state... [id=wizard-lambda-role:wizard-lambda-least-privilege]
+aws_lambda_permission.apigw_invoke: Refreshing state... [id=AllowAPIGatewayInvoke]
+aws_apigatewayv2_integration.lambda: Refreshing state... [id=c41a5e89]
+aws_apigatewayv2_route.health: Refreshing state... [id=37983633]
+aws_apigatewayv2_route.resource: Refreshing state... [id=78ae4edf]
+aws_wafv2_web_acl.ddos_mitigation: Refreshing state... [id=8c82bae2-7aaf-463b-86e6-3f22223b772b]
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  ~ update in-place
+
+Terraform will perform the following actions:
+
+  # aws_lambda_event_source_mapping.worker_sqs will be updated in-place
+  ~ resource "aws_lambda_event_source_mapping" "worker_sqs" {
+        id                                 = "fd9c8b06-cf04-4815-97d1-a9a1dd8e65c5"
+      ~ maximum_batching_window_in_seconds = 0 -> 5
+        tags                               = {}
+      ~ tags_all                           = {
+          + "Event"   = "WizardCloudHackathon2026"
+          + "Project" = "wizard"
+          + "Team"    = "Time-02"
+        }
+        # (23 unchanged attributes hidden)
+    }
+
+Plan: 0 to add, 1 to change, 0 to destroy.
+
+─────────────────────────────────────────────────────────────────────────────
+
+Note: You didn't use the -out option to save this plan, so Terraform can't
+guarantee to take exactly these actions if you run "terraform apply" now.
