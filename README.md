@@ -95,16 +95,20 @@ curl -s https://sjlpov3e8f.execute-api.us-east-1.amazonaws.com/health
 curl -s -X POST https://sjlpov3e8f.execute-api.us-east-1.amazonaws.com/api/v1/resource -H "Content-Type: application/json" -d '{"name":"Time-02","email":"time02@hackathon.com"}'
 ```
 
-### 🏗️ Arquitetura
-CloudFront (Origin Group) -> S3 Primary/DR
-API Gateway -> SQS -> Lambda worker -> DynamoDB
-WAF na borda
 
 RTO < 60s comprovado via curl + invalidation.
 
+
 ## 🏗️ Arquitetura Time-02 - RTO < 60s
 
-**Fluxo Web:** User -> WAF wizard-ddos-mitigation -> CloudFront E3MTNR17JA1OG5 -> Origin Group (Primary S3 sa-east-1 / DR S3 us-east-1)
-**Fluxo API:** API Gateway sjlpov3e8f (/health, /api/v1/resource) -> SQS -> Lambda wizard-worker -> DynamoDB wizard-app-data
+### Visão Limpa (Light - GitHub)
+![Architecture Light](./architecture-light.png)
 
-Arquiteturas visuais disponíveis em /architecture-light.png (GitHub) e /architecture-dark.png (Slide apresentação)
+### Visão Slide (Dark - Apresentação)
+![Architecture Dark](./architecture-dark.png)
+
+**Fluxos:**
+- **Web:** User -> WAF `wizard-ddos-mitigation` -> CloudFront `E3MTNR17JA1OG5` -> Origin Group Failover (Primary S3 `sa-east-1` Active / DR S3 `us-east-1` Standby)
+- **API:** API Gateway `sjlpov3e8f` (`/health`, `/api/v1/resource`) -> SQS -> Lambda `wizard-worker` -> DynamoDB `wizard-app-data`
+
+> Proteção DDoS via WAF + Baixa latência via CloudFront + RTO < 60s via failover cross-region
