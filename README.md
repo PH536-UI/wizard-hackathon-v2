@@ -101,3 +101,10 @@ API Gateway -> SQS -> Lambda worker -> DynamoDB
 WAF na borda
 
 RTO < 60s comprovado via curl + invalidation.
+
+## 🏗️ Arquitetura Time-02 - RTO < 60s
+
+**Fluxo Web:** User -> WAF wizard-ddos-mitigation -> CloudFront E3MTNR17JA1OG5 -> Origin Group (Primary S3 sa-east-1 / DR S3 us-east-1)
+**Fluxo API:** API Gateway sjlpov3e8f (/health, /api/v1/resource) -> SQS -> Lambda wizard-worker -> DynamoDB wizard-app-data
+
+Arquiteturas visuais disponíveis em /architecture-light.png (GitHub) e /architecture-dark.png (Slide apresentação)
