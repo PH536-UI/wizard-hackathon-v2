@@ -6,3 +6,12 @@ terraform/.terraform.lock.hcl
 evidence.zip
 .env
 tmp/
+.env
+*.tfvars
+.env
+*.tfvars
+*.tfstate
+*.tfstate.backup
+.env
+*.tfvars
+*.tfstate*
