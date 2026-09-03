@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="pt">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Wizard - Time-02</title>
+<style>
+body{font-family:Inter,sans-serif;max-width:720px;margin:40px auto;padding:24px;background:#faf5ff}
+.card{background:white;padding:24px;border-radius:16px;box-shadow:0 4px 20px rgba(0,0,0,.08)}
+input,button{padding:12px;margin:8px 0;width:100%;border-radius:8px;border:1px solid #ddd;box-sizing:border-box}
+button{background:#6d28d9;color:white;border:0;font-weight:bold;cursor:pointer}
+pre{background:#111;color:#0f0;padding:12px;border-radius:8px;overflow:auto}
+</style>
+</head>
+<body>
+<div class="card">
+<h1>🚀 Wizard Hackathon 2026 - Time-02</h1>
+<p><b>paulohenriquepereira2020@gmail.com</b></p>
+<p>API: https://sjlpov3e8f.execute-api.us-east-1.amazonaws.com</p>
+<input id="name" value="Time-02" placeholder="Nome">
+<input id="email" value="paulohenriquepereira2020@gmail.com" placeholder="Email">
+<button onclick="send()">Enviar Lead (POST /api/v1/resource)</button>
+<pre id="out">Testando /health...</pre>
+</div>
+<script>
+const API="https://sjlpov3e8f.execute-api.us-east-1.amazonaws.com";
+async function send(){
+  const out=document.getElementById('out');
+  out.textContent="Enviando...";
+  try{
+    const res=await fetch(API+"/api/v1/resource",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name:document.getElementById('name').value,email:document.getElementById('email').value})});
+    const data=await res.json(); out.textContent="✅ "+res.status+" "+JSON.stringify(data,null,2);
+  }catch(e){out.textContent="❌ "+e}
+}
+fetch(API+"/health").then(r=>r.json()).then(d=>document.getElementById('out').textContent="Health OK: "+JSON.stringify(d)).catch(e=>document.getElementById('out').textContent="Health erro: "+e);
+</script>
+</body>
+</html>

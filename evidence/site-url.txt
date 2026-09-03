@@ -1,0 +1,3 @@
+Site: https://d15gdt59kdhi5t.cloudfront.net
+API: https://sjlpov3e8f.execute-api.us-east-1.amazonaws.com
+CF API: https://dpm2y3dsdugyx.cloudfront.net

@@ -1,0 +1,58 @@
+{
+    "Items": [
+        {
+            "pk": {
+                "S": "lead"
+            },
+            "email": {
+                "S": "ph@teste.com"
+            },
+            "name": {
+                "S": "PH"
+            },
+            "processed_at": {
+                "N": "1788445325"
+            },
+            "sk": {
+                "S": "1788445325633"
+            }
+        },
+        {
+            "email": {
+                "S": "time02@hackathon.com"
+            },
+            "pk": {
+                "S": "lead"
+            },
+            "processed_at": {
+                "N": "1788445733"
+            },
+            "name": {
+                "S": "Time-02"
+            },
+            "sk": {
+                "S": "1788445733736"
+            }
+        },
+        {
+            "pk": {
+                "S": "lead"
+            },
+            "email": {
+                "S": "paulohenriquepereira2020@gmail.com"
+            },
+            "processed_at": {
+                "N": "1788446132"
+            },
+            "name": {
+                "S": "Time-02"
+            },
+            "sk": {
+                "S": "1788446132529"
+            }
+        }
+    ],
+    "Count": 3,
+    "ScannedCount": 3,
+    "ConsumedCapacity": null
+}

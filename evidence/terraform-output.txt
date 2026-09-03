@@ -1,0 +1,6 @@
+api_gateway_endpoint = "https://sjlpov3e8f.execute-api.us-east-1.amazonaws.com"
+cloudfront_domain = "dpm2y3dsdugyx.cloudfront.net"
+dynamodb_table_name = "wizard-app-data"
+lambda_function_name = "wizard-app"
+s3_bucket_name = "wizard-app-assets"
+waf_web_acl_arn = "arn:aws:wafv2:us-east-1:350146358260:global/webacl/wizard-ddos-mitigation/9d7a1caf-1072-4264-ac9d-80e53f07b826"

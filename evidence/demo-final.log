@@ -1,0 +1,66 @@
+=== WIZARD HACKATHON 2026 - Time-02 ===
+Email: paulohenriquepereira2020@gmail.com
+
+[1/5] Terraform outputs
+api_gateway_endpoint = "https://sjlpov3e8f.execute-api.us-east-1.amazonaws.com"
+cloudfront_domain = "dpm2y3dsdugyx.cloudfront.net"
+dynamodb_table_name = "wizard-app-data"
+lambda_function_name = "wizard-app"
+s3_bucket_name = "wizard-app-assets"
+waf_web_acl_arn = "arn:aws:wafv2:us-east-1:350146358260:global/webacl/wizard-ddos-mitigation/9d7a1caf-1072-4264-ac9d-80e53f07b826"
+
+[2/5] Health Check
+{
+  "status": "ok",
+  "ts": 1788446348
+}
+
+[3/5] POST /api/v1/resource (Producer -> SQS)
+{
+  "status": "queued",
+  "message_id": "8d2e23ba-700e-4df3-9b93-389eccbd0bc9"
+}
+MessageID: 8d2e23ba-700e-4df3-9b93-389eccbd0bc9
+
+[4/5] Aguardando worker (5s)...
+{
+  "name": "PH",
+  "email": "ph@teste.com",
+  "sk": "1788445325633",
+  "processed_at": "1788445325"
+}
+{
+  "name": "Time-02",
+  "email": "time02@hackathon.com",
+  "sk": "1788445733736",
+  "processed_at": "1788445733"
+}
+{
+  "name": "Time-02",
+  "email": "paulohenriquepereira2020@gmail.com",
+  "sk": "1788446132529",
+  "processed_at": "1788446132"
+}
+{
+  "name": "Time-02-final",
+  "email": "paulohenriquepereira2020@gmail.com",
+  "sk": "1788446333716",
+  "processed_at": "1788446333"
+}
+
+[5/5] SQS Status (deve estar vazia = consumida)
+{
+    "Attributes": {
+        "ApproximateNumberOfMessages": "0",
+        "ApproximateNumberOfMessagesNotVisible": "1"
+    }
+}
+
+=== FIM DEMO - Tudo OK ===
+Endpoints:
+  API: https://sjlpov3e8f.execute-api.us-east-1.amazonaws.com
+  Health: https://sjlpov3e8f.execute-api.us-east-1.amazonaws.com/health
+  Resource: https://sjlpov3e8f.execute-api.us-east-1.amazonaws.com/api/v1/resource
+  CloudFront: https://dpm2y3dsdugyx.cloudfront.net
+  Dynamo Table: wizard-app-data
+  WAF: arn:aws:wafv2:us-east-1:350146358260:global/webacl/wizard-ddos-mitigation/9d7a1caf-1072-4264-ac9d-80e53f07b826

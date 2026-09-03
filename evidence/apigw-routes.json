@@ -1,0 +1,18 @@
+{
+    "Items": [
+        {
+            "ApiKeyRequired": false,
+            "AuthorizationType": "NONE",
+            "RouteId": "9wdbn2v",
+            "RouteKey": "GET /health",
+            "Target": "integrations/axelqmi"
+        },
+        {
+            "ApiKeyRequired": false,
+            "AuthorizationType": "NONE",
+            "RouteId": "b5v8zt8",
+            "RouteKey": "ANY /api/v1/resource",
+            "Target": "integrations/axelqmi"
+        }
+    ]
+}

@@ -1,33 +1,8 @@
-# Terraform
 .terraform/
-*.tfstate
-*.tfstate.*
-crash.log
-crash.*.log
-*.tfplan
-
-# Secrets / credentials
-.env
-.env.*
-*.pem
-*.key
-
-# Python
-__pycache__/
-*.py[cod]
-.venv/
-venv/
-
-# OS / editor
-.DS_Store
-.vscode/
-.idea/
-
-# Build artifacts
+terraform/*.tfstate
+terraform/*.tfstate.backup
+terraform/.terraform.lock.hcl
 *.zip
-
-# Local Terraform backups
-terraform/providers.tf.backup-*
-
-# Historical evidence backups
-evidence/backups/
+evidence.zip
+.env
+tmp/
