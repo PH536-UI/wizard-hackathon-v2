@@ -99,3 +99,15 @@ provider "aws" {
     }
   }
 }
+
+provider "aws" {
+  alias  = "sa_east_1"
+  region = "sa-east-1"
+  default_tags {
+    tags = {
+      Team    = var.team_name
+      Project = var.project_name
+      Event   = "WizardCloudHackathon2026"
+    }
+  }
+}
