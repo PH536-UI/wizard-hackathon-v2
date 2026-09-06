@@ -1,16 +1,13 @@
 #!/bin/bash
 set -e
-echo "=== PREPARANDO TUDO ==="
-docker ps | grep floci || docker compose up -d
-sleep 2
-export AWS_ACCESS_KEY_ID=test
-export AWS_SECRET_ACCESS_KEY=test
-export AWS_DEFAULT_REGION=us-east-1
-cd ~/wizard-hackathon-v2/terraform
-terraform validate
-API_ID=$(terraform output -raw api_gateway_endpoint | awk -F[/.] '{print $3}')
-ENDPOINT="http://localhost:4566/execute-api/$API_ID/\$default"
-curl -s "$ENDPOINT/api/v1/resource" -X POST -H 'Content-Type: application/json' -d '{"name":"Healthcheck","email":"health@wizard.local"}' | python3 -m json.tool
-echo "Dynamo total:"
-aws --endpoint-url=http://localhost:4566 dynamodb scan --table-name wizard-app-data --select COUNT --output text
-echo "PRONTO!"
+export AWS_PROFILE=wizard
+echo "=== PREPARA DEMO ==="
+echo "<h1>Wizard - Time 02 - Vitrine no Ar - $(date -u)</h1>" | aws s3 cp - s3://wizard-site-primary-sa-east-1-536/index.html --region sa-east-1 --content-type text/html --cache-control no-cache
+echo "<h1>Wizard - Time 02 - DR</h1>" | aws s3 cp - s3://wizard-site-dr-us-east-1-536/index.html --region us-east-1 --content-type text/html --cache-control no-cache || true
+echo "Invalidando CloudFront..."
+aws cloudfront create-invalidation --distribution-id d15gdt59kdhi5t --paths "/*" --region us-east-1 || true
+echo "Testando..."
+curl -s https://dpm2y3dsdugyx.cloudfront.net/health
+echo ""
+curl -s -I https://d15gdt59kdhi5t.cloudfront.net | head -2
+echo "Pronto para demo"

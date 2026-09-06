@@ -2,3 +2,16 @@
     200 403
 HTTP/2 403 
 WAF ARN: arn:aws:wafv2:us-east-1:350146358260:global/webacl/wizard-ddos-mitigation/9d7a1caf-1072-4264-ac9d-80e53f07b826
+=== dom 06 set 2026 13:23:49 UTC - FINAL OK ===
+=== TIME-02 PITCH 5MIN - 08/09/2026 ===
+1. SAUDE:
+{"status": "ok", "ts": 1788701035}
+2. WAF BLOCK (200 req paralelo):
+    178 200
+     22 503
+-> Apos janela WAF:
+403
+403 = BLOQUEADO
+3. FAILOVER SITE:
+HTTP/2 200 
+Pitch OK - vitrine continua no ar
