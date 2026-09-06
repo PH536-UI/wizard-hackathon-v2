@@ -1,0 +1,4 @@
+=== EVIDENCIA WAF 403 - dom 06 set 2026 00:57:38 UTC ===
+    200 403
+HTTP/2 403 
+WAF ARN: arn:aws:wafv2:us-east-1:350146358260:global/webacl/wizard-ddos-mitigation/9d7a1caf-1072-4264-ac9d-80e53f07b826
