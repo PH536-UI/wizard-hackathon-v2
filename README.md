@@ -1,114 +1,29 @@
-# Wizard Cloud Hackathon 2026 - Time-02
+# 🧙‍♂️ WIZARD HACKATHON V2 - Vitrine Resiliente AWS
+**Time-02 | Pitch 08/09/2026 | VALIDADO**
 
-**Status: ✅ 100% OPERACIONAL - qui 03 set 2026 18:33:13 UTC**
+Vitrine WIZARD que nunca sai do ar.
 
-### 🌐 Acesso
-- **Site (CloudFront):** https://d15gdt59kdhi5t.cloudfront.net/
-- **Distribution ID:** E3MTNR17JA1OG5
-- **API:** https://sjlpov3e8f.execute-api.us-east-1.amazonaws.com
-- **API ID:** sjlpov3e8f
+## Problema WIZARD
+Rematricula Jan/Jul - 1h fora = R$50k perdidos
 
-### 📦 Infraestrutura
-- **S3 Primary:** wizard-site-primary-sa-east-1-536 (sa-east-1)
-- **S3 DR:** wizard-site-dr-us-east-1-536 (us-east-1)
-- **S3 Assets:** wizard-app-assets
-- **DynamoDB:** wizard-app-data
-- **Lambdas:** wizard-app, wizard-worker (us-east-1)
-- **WAF:** wizard-ddos-mitigation (CLOUDFRONT)
-- **Rotas API:** GET /health, ANY /api/v1/resource
+## Solucao 100% AWS - Validada 06/09
+- CloudFront: E3MTNR17JA1OG5 + EAVIC6ES41H7O
+- WAF: 200 req -> 403 BLOCKED
+- S3 Failover: 200 OK
+- Terraform: sns.tf
 
-### ✅ Testes Realizados
-```
-# Wizard - Time-02 - Relatório Final - qui 03 set 2026 18:32:17 UTC
+## Prova Real
+SAUDE ok | WAF 403 BLOQUEADO | FAILOVER 200
 
-## 1. Site Failover CloudFront
-- URL: https://d15gdt59kdhi5t.cloudfront.net
-- Distribution: E3MTNR17JA1OG5
-<h1>Wizard Time-02 - Primary OK - Thu Sep  3 05:36:20 PM UTC 2026</h1>
+## Demo 5min
+unset AWS vars; export AWS_PROFILE=wizard; ./scripts/demo-final.sh
 
+## Time-02
+- Paulo Henrique - DevOps AWS
+- Priscila
+- Rosinha
+- Vagner Tomaz
+- Lucas Araujo
+- Thamy Geek
 
-## 2. API Health
-{"status": "ok", "ts": 1788460348}
-
-## 3. API Async - POST
-{"status": "queued", "message_id": "7cebac4d-d6d1-4cf4-a80c-b422c06a6b3a"}
-
-## 4. S3 Buckets
-2026-09-03 14:11:30 wizard-app-assets
-2026-09-03 14:11:30 wizard-site-dr-us-east-1-536
-2026-09-03 14:11:30 wizard-site-primary-sa-east-1-536
-
-## 5. Lambdas
----------------------------
-|      ListFunctions      |
-+----------------+--------+
-|  wizard-app    |  None  |
-|  wizard-worker |  None  |
-+----------------+--------+
-
-## 6. DynamoDB
------------------------------------------------------------------
-|                             Scan                              |
-+-------------------------------------+-----------------+-------+
-|                email                |      name       |  pk   |
-+-------------------------------------+-----------------+-------+
-|  ph@teste.com                       |  PH             |  lead |
-|  time02@hackathon.com               |  Time-02        |  lead |
-|  paulohenriquepereira2020@gmail.com |  Time-02        |  lead |
-|  paulohenriquepereira2020@gmail.com |  Time-02-final  |  lead |
-|  paulohenriquepereira2020@gmail.com |  Time-02        |  lead |
-|  paulohenriquepereira2020@gmail.com |  Time-02        |  lead |
-|  paulohenriquepereira2020@gmail.com |  Time-02        |  lead |
-|  demo@example.com                   |  demo           |  lead |
-|  demo@example.com                   |  demo           |  lead |
-|  demo@example.com                   |  demo           |  lead |
-|  time02@hackathon.com               |  Time-02        |  lead |
-+-------------------------------------+-----------------+-------+
-
-## 7. WAF
-{
-    "NextMarker": "wizard-ddos-mitigation",
-    "WebACLs": [
-        {
-            "Name": "wizard-ddos-mitigation",
-            "Id": "9d7a1caf-1072-4264-ac9d-80e53f07b826",
-            "Description": "Blocks any single IP exceeding 100 requests per 5 minutes",
-            "LockToken": "aa16a2c6-afc1-4471-9d6c-71b7dc463e2d",
-            "ARN": "arn:aws:wafv2:us-east-1:350146358260:global/webacl/wizard-ddos-mitigation/9d7a1caf-1072-4264-ac9d-80e53f07b826"
-        }
-    ]
-}
-
-## 8. S3 Replication / Versioning
-
-aws: [ERROR]: An error occurred (ReplicationConfigurationNotFoundError) when calling the GetBucketReplication operation: The replication configuration was not found
-
-Additional error details:
-BucketName: wizard-site-primary-sa-east-1-536
-Sem replication explícita, mas com sync manual validado
-```
-
-### 🧪 Como Testar (Juiz)
-```bash
-curl -s https://d15gdt59kdhi5t.cloudfront.net/
-curl -s https://sjlpov3e8f.execute-api.us-east-1.amazonaws.com/health
-curl -s -X POST https://sjlpov3e8f.execute-api.us-east-1.amazonaws.com/api/v1/resource -H "Content-Type: application/json" -d '{"name":"Time-02","email":"time02@hackathon.com"}'
-```
-
-
-RTO < 60s comprovado via curl + invalidation.
-
-
-## 🏗️ Arquitetura Time-02 - RTO < 60s
-
-### Visão Limpa (Light - GitHub)
-![Architecture Light](./architecture-light.png)
-
-### Visão Slide (Dark - Apresentação)
-![Architecture Dark](./architecture-dark.png)
-
-**Fluxos:**
-- **Web:** User -> WAF `wizard-ddos-mitigation` -> CloudFront `E3MTNR17JA1OG5` -> Origin Group Failover (Primary S3 `sa-east-1` Active / DR S3 `us-east-1` Standby)
-- **API:** API Gateway `sjlpov3e8f` (`/health`, `/api/v1/resource`) -> SQS -> Lambda `wizard-worker` -> DynamoDB `wizard-app-data`
-
-> Proteção DDoS via WAF + Baixa latência via CloudFront + RTO < 60s via failover cross-region
+Repo: PH536-UI/wizard-hackathon-v2 | Conta: 350146358260
