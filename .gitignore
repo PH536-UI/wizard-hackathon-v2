@@ -8,3 +8,11 @@
 .env
 evidence.zip
 node_modules/
+*.tfstate
+*.tfstate.backup
+*.tfstate.*
+.terraform/
+terraform/disabled/
+providers.tf.backup
+terraform.tfstate*
+*.tfplan
