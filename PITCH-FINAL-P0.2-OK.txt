@@ -1,0 +1,12 @@
+=== TIME-02 PITCH 5MIN - 08/09/2026 ===
+1. SAUDE:
+{"status": "ok", "ts": 1788801156}
+2. WAF BLOCK (200 req paralelo):
+    177 200
+     23 503
+-> Apos janela WAF:
+403
+403 = BLOQUEADO
+3. FAILOVER SITE:
+HTTP/2 200 
+Pitch OK - vitrine continua no ar
