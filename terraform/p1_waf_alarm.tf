@@ -1,3 +1,8 @@
+resource "aws_sns_topic" "waf_alerts_us_east_1" {
+  provider = aws.us_east_1
+  name     = "wizard-waf-alerts-us-east-1"
+}
+
 resource "aws_cloudwatch_metric_alarm" "waf_block_rate_limit" {
   provider            = aws.us_east_1
   alarm_name          = "waf-block-rate-limit"
@@ -9,10 +14,11 @@ resource "aws_cloudwatch_metric_alarm" "waf_block_rate_limit" {
   statistic           = "Sum"
   threshold           = 10
   alarm_description   = "WAF bloqueando - possivel ataque"
-  alarm_actions       = [aws_sns_topic.alerts.arn]
+  alarm_actions       = [aws_sns_topic.waf_alerts_us_east_1.arn]
+
   dimensions = {
-    Rule   = "ALL"
-    WebACL = "wizard-ddos-mitigation"
+    Rule   = "ALL",
+    WebACL = "wizard-ddos-mitigation",
     Region = "Global"
   }
 }
