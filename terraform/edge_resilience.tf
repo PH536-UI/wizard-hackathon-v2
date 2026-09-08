@@ -77,6 +77,7 @@ resource "aws_wafv2_web_acl" "api_waf" {
 resource "aws_cloudfront_distribution" "cdn" {
   enabled             = true
   default_root_object = "index.html"
+  web_acl_id          = aws_wafv2_web_acl.ddos_mitigation.arn
 
   origin {
     domain_name              = aws_s3_bucket.primary.bucket_regional_domain_name

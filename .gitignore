@@ -16,3 +16,5 @@ terraform/disabled/
 providers.tf.backup
 terraform.tfstate*
 *.tfplan
+*.tfstate*
+*.tfstate.*.backup

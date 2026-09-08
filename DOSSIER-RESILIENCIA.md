@@ -16,7 +16,7 @@ Cliente -> CloudFront + WAF (Rate 100/5min) -> APIGW HTTP API -> Lambda producer
 
 ## 3. Failover - Prova Game Day
 Para demonstrar no pitch de 5min:
-`aws s3 rm s3://wizard-site-primary-sa-east-1-536/index.html --region us-east-1 && curl -i https://d15gdt59kdhi5t.cloudfront.net`
+`aws s3 rm s3://wizard-site-primary-sa-east-1-536/index.html --region sa-east-1 && curl -i https://d15gdt59kdhi5t.cloudfront.net`
 Esperado: 200 vindo do DR (wizard-site-dr-us-east-1-536)
 
 ## 4. Custo e Tags
