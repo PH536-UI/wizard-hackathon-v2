@@ -1,29 +1,32 @@
-# 🧙‍♂️ WIZARD HACKATHON V2 - Vitrine Resiliente AWS
-**Time-02 | Pitch 08/09/2026 | VALIDADO**
+# 🧙‍♂️ WIZARD HACKATHON V2 - AI Security Lab
 
-Vitrine WIZARD que nunca sai do ar.
+![Architecture Light](architecture-light.png)
 
-## Problema WIZARD
-Rematricula Jan/Jul - 1h fora = R$50k perdidos
+> Building the future of AI-powered Security Automation
 
-## Solucao 100% AWS - Validada 06/09
-- CloudFront: E3MTNR17JA1OG5 + EAVIC6ES41H7O
-- WAF: 200 req -> 403 BLOCKED
-- S3 Failover: 200 OK
-- Terraform: sns.tf
+**[PT-BR](#-pt-br) | [EN](#-en)**
 
-## Prova Real
-SAUDE ok | WAF 403 BLOQUEADO | FAILOVER 200
+---
 
-## Demo 5min
-unset AWS vars; export AWS_PROFILE=wizard; ./scripts/demo-final.sh
+### 🇧🇷 PT-BR - Laboratório de Resiliência e Automação
+Plataforma completa de automação para Hackathon de Segurança com foco em Red Team & Blue Team e resiliência cloud.
 
-## Time-02
-- Paulo Henrique - DevOps AWS
-- Priscila
-- Rosinha
-- Vagner Tomaz
-- Lucas Araujo
-- Thamy Geek
+**O que construí:**
+- Orquestrador de times e containers Docker
+- Sistema de pontuação em tempo real  
+- Bots de ataque e defesa automatizados
+- Proxy reverso com Nginx para isolamento
+- Infraestrutura como código com Terraform
+- Pipeline de evidências automatizado
 
-Repo: PH536-UI/wizard-hackathon-v2 | Conta: 350146358260
+**Arquitetura:**
+![Architecture Dark](architecture-dark.png)
+
+**Stack:**
+`Docker | Python | Terraform | AWS | Nginx | Linux`
+
+**Como rodar:**
+```bash
+./RUN_ALL_V2.sh
+# ou
+docker compose up -d
